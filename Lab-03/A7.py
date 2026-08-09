@@ -1,62 +1,34 @@
+import math
 import pandas as pd
 import numpy as np
-import math
 
 
-def dot_product(A, B):
-    result = 0
-
-    for i in range(len(A)):
-        result += A[i] * B[i]
-
-    return result
-
-
-def euclidean_norm(A):
-    result = 0
-
-    for i in range(len(A)):
-        result += A[i] ** 2
-
-    return math.sqrt(result)
+def dot_product(vec1, vec2, length):
+    vec1 = list(vec1)
+    vec2 = list(vec2)
+    total = 0
+    for i in range(length):
+        total += vec1[i] * vec2[i]
+    return total
 
 
-df = pd.read_excel(
-    "Lab-03/labdata.xlsx",
-    sheet_name="marketing_campaign"
-)
+def euclidean_norm(vec, length):
+    vec = list(vec)
+    total = 0
+    for i in range(length):
+        total += vec[i] * vec[i]
+    total = math.sqrt(total)
+    return total
 
 
-features = ["Income", "Recency"]
+A = [3, 7, 2, 9, 5]
+B = [8, 1, 6, 4, 3]
+n = len(A)
 
+dot = dot_product(A, B, n)
+euclidean_A = euclidean_norm(A, n)
 
-df = df.dropna(subset=features)
-
-
-A = df.iloc[0][features].values
-B = df.iloc[1][features].values
-
-
-my_dot = dot_product(A, B)
-my_norm_A = euclidean_norm(A)
-my_norm_B = euclidean_norm(B)
-
-
-numpy_dot = np.dot(A, B)
-numpy_norm_A = np.linalg.norm(A)
-numpy_norm_B = np.linalg.norm(B)
-
-print("Vector A:", A)
-print("Vector B:", B)
-
-print("\nDot Product")
-print("Own Function :", my_dot)
-print("NumPy        :", numpy_dot)
-
-print("\nEuclidean Norm of Vector A")
-print("Own Function :", my_norm_A)
-print("NumPy        :", numpy_norm_A)
-
-print("\nEuclidean Norm of Vector B")
-print("Own Function :", my_norm_B)
-print("NumPy        :", numpy_norm_B)
+print("Self Dot product: ", dot)
+print("Numpy Dot Product: ", np.dot(A, B))
+print("Self Euclidean Norm A: ", euclidean_A)
+print("Numpy Euclidean Norm A: ", np.linalg.norm(A))
