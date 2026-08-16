@@ -30,3 +30,45 @@ X_train, X_test, y_train, y_test = train_test_split(
     random_state=42,
     stratify=y
 )
+
+k_values = range(1, 11)
+
+sklearn_acc = []
+own_acc = []
+weighted_acc = []
+
+
+for k in k_values:
+
+    
+    sk = KNeighborsClassifier(n_neighbors=k)
+    sk.fit(X_train, y_train)
+    sklearn_acc.append(sk.score(X_test, y_test))
+
+    mk = MyKNN(k=k, p=2, sort_algorithm="merge")
+    mk.fit(X_train, y_train)
+    own_acc.append(mk.score(X_test, y_test))
+
+    wk = MyWeightedKNN(k=k, p=2, sort_algorithm="merge")
+    wk.fit(X_train, y_train)
+    weighted_acc.append(wk.score(X_test, y_test))
+
+print("\nk   sklearn   Our kNN   Weighted kNN")
+
+for i, k in enumerate(k_values):
+    print(
+        k,
+        f"{sklearn_acc[i]:.3f}",
+        f"{own_acc[i]:.3f}",
+        f"{weighted_acc[i]:.3f}"
+    )
+
+plt.plot(k_values, sklearn_acc, marker="o", label="sklearn kNN")
+plt.plot(k_values, own_acc, marker="s", label="Our kNN")
+plt.plot(k_values, weighted_acc, marker="^", label="Weighted kNN")
+
+plt.xlabel("k")
+plt.ylabel("Accuracy")
+
+plt.legend()
+plt.show()
