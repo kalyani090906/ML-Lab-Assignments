@@ -53,7 +53,7 @@ for k in k_values:
     wk.fit(X_train, y_train)
     weighted_acc.append(wk.score(X_test, y_test))
 
-print("\nk   sklearn   Our kNN   Weighted kNN")
+print("\nk   sklearn   My kNN   Weighted kNN")
 
 for i, k in enumerate(k_values):
     print(
@@ -64,7 +64,7 @@ for i, k in enumerate(k_values):
     )
 
 plt.plot(k_values, sklearn_acc, marker="o", label="sklearn kNN")
-plt.plot(k_values, own_acc, marker="s", label="Our kNN")
+plt.plot(k_values, own_acc, marker="s", label="My kNN")
 plt.plot(k_values, weighted_acc, marker="^", label="Weighted kNN")
 
 plt.xlabel("k")
