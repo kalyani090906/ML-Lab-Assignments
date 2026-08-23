@@ -1,0 +1,4 @@
+Model,Accuracy,Precision,Recall,F1-score,Avg Time (s)
+Own kNN (Lab 5),0.667,0.571,1.0,0.727,0.0007
+sklearn kNN,0.667,0.571,1.0,0.727,0.2054
+AI-generated kNN (A1),0.667,0.571,1.0,0.727,0.00056
